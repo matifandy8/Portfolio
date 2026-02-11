@@ -15,6 +15,7 @@
   margin-bottom: 4rem;
   text-transform: uppercase;
   color: #ffffff;
+  letter-spacing: 0.1em;
 }
 
 .projects-grid {
@@ -28,15 +29,59 @@
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 12px;
-  padding: 2rem;
+  overflow: hidden;
   transition: all 0.3s ease;
-  backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .project-card:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 51, 51, 0.3);
+  box-shadow: 0 10px 30px rgba(255, 51, 51, 0.1);
+}
+
+.project-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, rgba(255, 51, 51, 0.1), rgba(0, 23, 45, 0.8));
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.project-image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 51, 51, 0.2) 0%,
+    rgba(0, 23, 45, 0.4) 50%,
+    rgba(255, 51, 51, 0.1) 100%
+  );
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+
+.project-card:hover .project-image-overlay {
+  opacity: 0.6;
+}
+
+.project-content {
+  padding: 2rem;
 }
 
 .project-title {
@@ -87,8 +132,49 @@
     padding: 4rem 2rem 2rem;
   }
   
+  .section-title {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+  }
+  
   .projects-grid {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+  
+  .project-image {
+    height: 150px;
+  }
+  
+  .project-content {
+    padding: 1.5rem;
+  }
+}
+
+.projects.no-animations .project-card,
+.projects.no-animations .project-card *,
+.projects.no-animations .project-image img,
+.projects.no-animations .project-image-overlay,
+.projects.no-animations .project-link {
+  transition: none !important;
+  transform: none !important;
+}
+
+.projects.no-animations .project-card:hover {
+  transform: none;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+.projects.no-animations .project-card:hover .project-image img {
+  transform: none;
+}
+
+.projects.no-animations .project-card:hover .project-image-overlay {
+  opacity: 0.8;
+}
+
+.projects.no-animations .project-link:hover {
+  color: #ffffff;
 }

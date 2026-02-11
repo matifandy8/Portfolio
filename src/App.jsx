@@ -4,6 +4,7 @@ import { ReactLenis } from 'lenis/react'
 import { useEffect, useRef } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
+import HeroTextSection from './components/HeroTextSection'
 import Projects from './components/Projects'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
@@ -23,12 +24,17 @@ function App() {
 
   return (
     <div className="app" >
+      <div className="global-background" aria-hidden="true"></div>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef}>
         <Header />
         
         <main id="main-content">
           <section id="home" aria-labelledby="hero-title">
             <Hero />
+          </section>
+
+          <section id="hero-text-section" aria-labelledby="hero-text-section-title">
+            <HeroTextSection />
           </section>
           
           <section id="experience" aria-labelledby="experience-title">
