@@ -4,36 +4,40 @@ function Projects({ animationsEnabled = true }) {
 
   const projects = [
     {
-      title: 'Neobrutalismcss',
-      description: 'Modern React-based shopping cart with real-time inventory management and payment integration.',
-      tech: ['HTML', 'CSS'],
-      link: '',
-      image: null // No image for this project
-    },
-    {
       title: 'ZonaPartido',
-      description: 'Website for join, create matches and play football and other sports',
-      tech: ['Next.js', 'Tailwind CSS', 'Clerk auth', 'Supabase'],
-      link: '#',
-      image: '../assets/images/zonapartido-project.png'
+      description: 'A modern web platform for organizing and managing sports matches, connecting individual players and teams looking to complete their lineups.',
+      tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Clerk auth', 'Supabase'],
+      link: 'https://zona-partido.vercel.app/',
+      image: '../src/assets/images/zonapartido-project.png'
     },
     {
-      title: 'Mobile Web App',
-      description: 'Progressive web application with offline capabilities and native-like performance.',
-      tech: ['React', 'PWA', 'Service Workers', 'IndexedDB'],
-      link: '#',
-      image: null // No image for this project
+      title: 'NeoBrutalismCSS',
+      description: 'CSS library that provides a variety of utility classes to help you style your website. Library inspired by the Neo-Brutalist design trend.',
+      tech: ['HTML', 'CSS', 'Sass'],
+      github: 'https://github.com/matifandy8/NeoBrutalismCSS',
+      link: 'https://matifandy8.github.io/NeoBrutalismCSS/',
+      image: '../src/assets/images/neobrutalismcss-project.png'
+    },
+    {
+      title: 'Destino Uruguay',
+      description: 'A web platform to discover cultural events, festivals, and travel destinations across Uruguay.',
+      tech: ['Next.js', 'TypeScript', 'Cheerio', 'Nodemailer'],
+      github: 'https://github.com/matifandy8/destinouruguay',
+      link: 'https://destinouruguay.vercel.app/',
+      image: '../src/assets/images/destinouruguay-project.webp'
     },
   ]
 
+
+
   return (
-    <section className={`projects ${!animationsEnabled ? 'no-animations' : ''}`}>
+    <section className={`projects ${!animationsEnabled ? 'no-animations' : ''}`} >
       <div className="container">
         <h2 id="projects-title" className="section-title">Featured Projects</h2>
         
         <div className="projects-grid">
           {projects.map((project, index) => (
-            <article className="project-card" key={index}>
+            <article className="project-card cyber-clip" key={index}>
               {project.image && (
                 <div className="project-image">
                   <img 
@@ -49,7 +53,7 @@ function Projects({ animationsEnabled = true }) {
                 <h3 className="project-title">{project.title}</h3>
                 <p className="project-description">{project.description}</p>
                 
-                <div className="project-tech" aria-label="Tecnologías utilizadas">
+                <div className="project-tech" role="group" aria-label="Technologies used">
                   {project.tech.map((tech, techIndex) => (
                     <span className="tech-tag" key={techIndex}>
                       {tech}
@@ -57,15 +61,28 @@ function Projects({ animationsEnabled = true }) {
                   ))}
                 </div>
                 
-                {project.link && (
-                  <a 
-                    href={project.link} 
-                    className="project-link"
-                    aria-label={`Ver proyecto ${project.title}`}
-                  >
-                    View Project →
-                  </a>
-                )}
+                <div className="project-links">
+                  {project.link && (
+                    <a 
+                      href={project.link} 
+                      className="cyber-button-alt"
+                      aria-label={`Visit ${project.title} live website`}
+                      target="_blank"
+                    >
+                      View Project →
+                    </a>
+                  )}
+                  {project.github && (
+                    <a 
+                      href={project.github} 
+                      className="cyber-button-alt"
+                      aria-label={`View GitHub repository for ${project.title}`}
+                      target="_blank"
+                    >
+                      View GitHub →
+                    </a>
+                  )}
+                </div>
               </div>
             </article>
           ))}
