@@ -1,4 +1,9 @@
 import '../styles/Experience.css'
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 function Experience() {
 
@@ -25,8 +30,45 @@ function Experience() {
     }
   ]
 
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate title
+      gsap.from(".section-title", {
+        scrollTrigger: {
+          trigger: ".experience",
+          start: "top 90%",
+          once: true,
+        },
+        y: 30,
+        opacity: 0,
+        duration: 1,
+        ease: "power3.out"
+      })
+
+      // Animate items
+      gsap.from(".timeline-item", {
+        scrollTrigger: {
+          trigger: ".timeline",
+          start: "top 90%",
+          once: true,
+        },
+        y: 40,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
+      })
+    }, sectionRef)
+
+    ScrollTrigger.refresh()
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-    <section className="experience">
+    <section className="experience" ref={sectionRef}>
       <div className="container">
         <h2 id="experience-title" className="section-title">Professional Experience</h2>
         

@@ -1,6 +1,9 @@
 import './App.css'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ReactLenis } from 'lenis/react'
+
+gsap.registerPlugin(ScrollTrigger)
 import { useEffect, useRef } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
@@ -19,7 +22,15 @@ function App() {
   
     gsap.ticker.add(update)
   
-    return () => gsap.ticker.remove(update)
+    // Small delay to ensure all components are rendered and heights are correct
+    const timer = setTimeout(() => {
+      ScrollTrigger.refresh()
+    }, 100)
+  
+    return () => {
+      gsap.ticker.remove(update)
+      clearTimeout(timer)
+    }
   }, [])
 
   return (
@@ -33,9 +44,9 @@ function App() {
             <Hero />
           </section>
 
-          <section id="hero-text-section" aria-labelledby="hero-text-section-title">
+          <div id="hero-text-region" className="hero-text-container">
             <HeroTextSection />
-          </section>
+          </div>
           
           <section id="experience" aria-labelledby="experience-title">
             <Experience />

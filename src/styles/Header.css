@@ -3,11 +3,15 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 2rem 4rem;
+  padding: 1.5rem 4rem;
   z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: rgba(0, 23, 45, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .logo-text {

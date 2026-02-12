@@ -7,7 +7,7 @@ function Header() {
         <span className="logo-text">MATIAS DEV</span>
       </div>
       
-      <nav className="nav" aria-label="Navegación principal">
+      <nav className="nav" aria-label="Main navigation">
         <ul className="nav-list">
           <li><a href="#home" className="nav-link">Home</a></li>
           <li><a href="#projects" className="nav-link">Projects</a></li>

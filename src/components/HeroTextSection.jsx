@@ -6,7 +6,7 @@ function HeroTextSection() {
     <div className="hero-text-section" aria-hidden="true">
       <img 
         src="/src/assets/images/hero-bg-text.png" 
-        alt="Hero background text decoration"
+        alt=""
         className="hero-text-image"
       />
     </div>

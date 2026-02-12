@@ -89,7 +89,7 @@ function Hero() {
           and implementing cutting-edge web solutions.
         </p>
         
-        <a href="#contact" className="cta-button" aria-label="Contactar con Matias">
+        <a href="#contact" className="cyber-button" aria-label="Contact Matias">
           Contact Me
         </a>
       </div>
