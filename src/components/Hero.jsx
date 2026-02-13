@@ -12,65 +12,71 @@ function Hero() {
   const titleRef = useRef(null)
 
   useEffect(() => {
-    // Sticky scroll animation with pin effect
-    // This pins the hero section and creates a dramatic reveal
-    const heroAnimation = gsap.to(".hero-content", {
-      opacity: 0,
-      scale: 0.8,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 1,
-        pin: true,
-        pinSpacing: true, // Remove extra spacing
-        markers: false
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 1024px)",
+      isMobile: "(max-width: 1023px)",
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      let { reduceMotion } = context.conditions;
+
+      if (!reduceMotion) {
+        // High-motion animations for the reveal
+        gsap.to(".hero-content", {
+          opacity: 0,
+          scale: 0.8,
+          ease: "none",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "top top",
+            end: "bottom top",
+            scrub: 1,
+            pin: true,
+            pinSpacing: true
+          }
+        });
+
+        gsap.fromTo(".hero-text-section", 
+          { opacity: 0.2 }, 
+          {
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: ".hero",
+              start: "10% top",
+              end: "50% top",
+              pin: true,
+              scrub: 1.5
+            }
+          }
+        );
+
+        gsap.to(".hero-text-section", {
+          opacity: 0,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: ".hero",
+            start: "50% top",
+            end: "100% top",
+            pin: true,
+            scrub: 1.5
+          }
+        });
+      } else {
+        // Simplified entry for reduced motion
+        gsap.from(".hero-content", {
+          opacity: 0,
+          duration: 1.5,
+          ease: "power2.out"
+        });
       }
-    })
+    });
 
-    // Hero text section fade in animation
-    const textSectionAnimation = gsap.fromTo(".hero-text-section", {
-      opacity: 0.2,       // Start with very low opacity
-    }, {
-      opacity: 1,         // Fade in to full opacity
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "10% top",    // Start immediately when hero animation ends
-        end: "50% top",     // End quickly for faster transition
-        pin: true,
-        markers: false,
-        pinSpacing: true, // Remove extra spacing
-        scrub: 1.5        // Faster response to scroll
-      }
-    })
-
-    // Hero text section fade out animation
-    const textSectionFadeOut = gsap.to(".hero-text-section", {
-      opacity: 0,         // Fade out completely
-      ease: "power2.inOut", // Smoother easing
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "50% top",    // Start fading out after appearing
-        end: "100% top",    // Complete fade out
-        pin: true,
-        markers: false,
-        pinSpacing: true, // Remove extra spacing
-        scrub: 1.5        // Smoother, more gradual response
-      }
-    })
-
- 
-
-    // Cleanup on component unmount
-    return () => {
-      heroAnimation.kill()
-      textSectionAnimation.kill()
-      textSectionFadeOut.kill()
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-    }
+    return () => mm.revert();
   }, [])
+
+
 
   return (
     <main className="hero">

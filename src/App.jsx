@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ReactLenis } from 'lenis/react'
 
 gsap.registerPlugin(ScrollTrigger)
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import HeroTextSection from './components/HeroTextSection'
@@ -13,22 +13,30 @@ import Experience from './components/Experience'
 import Contact from './components/Contact'
 
 function App() {
- const lenisRef = useRef()
+  const lenisRef = useRef()
+  const [reducedMotion, setReducedMotion] = useState(() => 
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches
+  )
   
   useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const handleChange = (e) => setReducedMotion(e.matches)
+    
+    mediaQuery.addEventListener('change', handleChange)
+
     function update(time) {
       lenisRef.current?.lenis?.raf(time * 1000)
     }
   
     gsap.ticker.add(update)
   
-    // Small delay to ensure all components are rendered and heights are correct
     const timer = setTimeout(() => {
       ScrollTrigger.refresh()
     }, 100)
   
     return () => {
       gsap.ticker.remove(update)
+      mediaQuery.removeEventListener('change', handleChange)
       clearTimeout(timer)
     }
   }, [])
@@ -53,7 +61,7 @@ function App() {
           </section>
 
           <section id="projects" aria-labelledby="projects-title">
-            <Projects />
+            <Projects animationsEnabled={!reducedMotion} />
           </section>
           
           <section id="contact" aria-labelledby="contact-title">
@@ -64,5 +72,6 @@ function App() {
     </div>
   )
 }
+
 
 export default App

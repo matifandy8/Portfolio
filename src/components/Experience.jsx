@@ -33,39 +33,54 @@ function Experience() {
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Animate title
-      gsap.from(".section-title", {
-        scrollTrigger: {
-          trigger: ".experience",
-          start: "top 90%",
-          once: true,
-        },
-        y: 30,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
-      })
+    const mm = gsap.matchMedia();
 
-      // Animate items
-      gsap.from(".timeline-item", {
-        scrollTrigger: {
-          trigger: ".timeline",
-          start: "top 90%",
-          once: true,
-        },
-        y: 40,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
-      })
-    }, sectionRef)
+    mm.add({
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { reduceMotion } = context.conditions;
 
-    ScrollTrigger.refresh()
+      if (!reduceMotion) {
+        // Animate title
+        gsap.from(".section-title", {
+          scrollTrigger: {
+            trigger: ".experience",
+            start: "top 90%",
+            once: true,
+          },
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out"
+        })
 
-    return () => ctx.revert()
+        // Animate items
+        gsap.from(".timeline-item", {
+          scrollTrigger: {
+            trigger: ".timeline",
+            start: "top 90%",
+            once: true,
+          },
+          y: 40,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        })
+      } else {
+        // Static reveal for reduced motion
+        gsap.from(".timeline-item", {
+          opacity: 0,
+          duration: 1,
+          stagger: 0.2
+        })
+      }
+    });
+
+    return () => mm.revert()
   }, [])
+
+
 
   return (
     <section className="experience" ref={sectionRef}>

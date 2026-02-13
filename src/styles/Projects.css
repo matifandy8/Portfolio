@@ -140,21 +140,25 @@
 
 .tech-tag {
   background: rgba(255, 255, 255, 0.05);
-  color: #ffffff;
-  padding: 0.35rem 0.9rem;
-  font-size: 0.75rem;
-  font-weight: 500;
+  color: #cccccc;
+  padding: 0.4rem 1rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.1);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   transition: all 0.3s ease;
+  clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
 }
 
 .tech-tag:hover {
   background: rgba(255, 51, 51, 0.1);
-  border-color: var(--primary-red);
-  color: var(--primary-red);
+  border-color: rgba(255, 51, 51, 0.5);
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(255, 51, 51, 0.2);
 }
+
 
 .project-links {
   display: flex;
