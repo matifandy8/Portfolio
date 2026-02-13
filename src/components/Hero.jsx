@@ -72,7 +72,7 @@ function Hero() {
 
 
   return (
-    <main className="hero">
+    <section className="hero">
       <div className="hero-content">
         <h1 
           ref={titleRef}
@@ -92,7 +92,8 @@ function Hero() {
           Contact Me
         </a>
       </div>
-    </main>
+    </section>
+
   )
 }
 
