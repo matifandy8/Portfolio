@@ -14,67 +14,60 @@ function Hero() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add({
-      isDesktop: "(min-width: 1024px)",
-      isMobile: "(max-width: 1023px)",
-      reduceMotion: "(prefers-reduced-motion: reduce)"
-    }, (context) => {
-      let { reduceMotion } = context.conditions;
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      // Sticky scroll animation with pin effect
+      gsap.to(".hero-content", {
+        opacity: 0,
+        scale: 0.8,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: true,
+          pinSpacing: true,
+          markers: false
+        }
+      })
 
-      if (!reduceMotion) {
-        // High-motion animations for the reveal
-        gsap.to(".hero-content", {
-          opacity: 0,
-          scale: 0.8,
-          ease: "none",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "top top",
-            end: "bottom top",
-            scrub: 1,
-            pin: true,
-            pinSpacing: true
-          }
-        });
+      gsap.fromTo(".hero-text-section", {
+        opacity: 0.2,
+      }, {
+        opacity: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "10% top",
+          end: "50% top",
+          pin: true,
+          markers: false,
+          pinSpacing: true,
+          scrub: 1.5
+        }
+      })
 
-        gsap.fromTo(".hero-text-section", 
-          { opacity: 0.2 }, 
-          {
-            opacity: 1,
-            ease: "none",
-            scrollTrigger: {
-              trigger: ".hero",
-              start: "10% top",
-              end: "50% top",
-              pin: true,
-              scrub: 1.5
-            }
-          }
-        );
+      gsap.to(".hero-text-section", {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "50% top",
+          end: "150% top",
+          pin: true,
+          markers: false,
+          pinSpacing: true,
+          scrub: 2
+        }
+      })
 
-        gsap.to(".hero-text-section", {
-          opacity: 0,
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: ".hero",
-            start: "50% top",
-            end: "100% top",
-            pin: true,
-            scrub: 1.5
-          }
-        });
-      } else {
-        // Simplified entry for reduced motion
-        gsap.from(".hero-content", {
-          opacity: 0,
-          duration: 1.5,
-          ease: "power2.out"
-        });
-      }
     });
 
-    return () => mm.revert();
+    return () => {
+      mm.revert();
+    }
   }, [])
+
 
 
 

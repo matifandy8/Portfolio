@@ -23,12 +23,8 @@ function Contact() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add({
-      reduceMotion: "(prefers-reduced-motion: reduce)"
-    }, (context) => {
-      const { reduceMotion } = context.conditions;
-
-      if (!reduceMotion) {
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
         gsap.from(".section-title", {
           scrollTrigger: {
             trigger: ".contact",
@@ -64,18 +60,13 @@ function Contact() {
           duration: 1,
           ease: "power3.out"
         })
-      } else {
-        // Simple reveal for reduced motion
-        gsap.from(".contact-content", {
-          opacity: 0,
-          duration: 1,
-          ease: "power2.out"
-        })
-      }
+      }, sectionRef)
+      return () => ctx.revert()
     });
 
     return () => mm.revert()
   }, [])
+
 
 
 

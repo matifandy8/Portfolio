@@ -35,13 +35,8 @@ function Experience() {
   useEffect(() => {
     const mm = gsap.matchMedia();
 
-    mm.add({
-      reduceMotion: "(prefers-reduced-motion: reduce)"
-    }, (context) => {
-      const { reduceMotion } = context.conditions;
-
-      if (!reduceMotion) {
-        // Animate title
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      const ctx = gsap.context(() => {
         gsap.from(".section-title", {
           scrollTrigger: {
             trigger: ".experience",
@@ -54,7 +49,6 @@ function Experience() {
           ease: "power3.out"
         })
 
-        // Animate items
         gsap.from(".timeline-item", {
           scrollTrigger: {
             trigger: ".timeline",
@@ -67,18 +61,13 @@ function Experience() {
           stagger: 0.15,
           ease: "power3.out"
         })
-      } else {
-        // Static reveal for reduced motion
-        gsap.from(".timeline-item", {
-          opacity: 0,
-          duration: 1,
-          stagger: 0.2
-        })
-      }
+      }, sectionRef)
+      return () => ctx.revert()
     });
 
     return () => mm.revert()
   }, [])
+
 
 
 

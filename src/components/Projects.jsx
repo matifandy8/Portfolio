@@ -1,6 +1,68 @@
+import { useEffect, useRef } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/Projects.css'
 
+gsap.registerPlugin(ScrollTrigger)
+
 function Projects({ animationsEnabled = true }) {
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.context(() => {
+        gsap.from(".section-title", {
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 60%",
+            once: true,
+            markers: false
+          },
+          y: 30,
+          opacity: 0,
+          duration: 1,
+          ease: "power3.out"
+        })
+
+        gsap.from(".project-card", {
+          scrollTrigger: {
+            trigger: ".projects-grid",
+            start: "top 60%",
+            once: true,
+            markers: false
+          },
+          y: 50,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        })
+        gsap.to(".project-card", {
+          scrollTrigger: {
+            trigger: ".projects-grid",
+            start: "top 60%",
+            once: true,
+            markers: false
+          },
+          y: 50,
+          opacity: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        })
+      }, sectionRef)
+    });
+
+    return () => {
+      mm.revert();
+    }
+  }, [animationsEnabled])
+
+
+
+
 
   const projects = [
     {
@@ -28,10 +90,9 @@ function Projects({ animationsEnabled = true }) {
     },
   ]
 
-
-
   return (
-    <section className={`projects ${!animationsEnabled ? 'no-animations' : ''}`} >
+    <section className={`projects ${!animationsEnabled ? 'no-animations' : ''}`} ref={sectionRef}>
+
       <div className="container">
         <h2 id="projects-title" className="section-title">Featured Projects</h2>
         
