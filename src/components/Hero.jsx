@@ -88,9 +88,19 @@ function Hero() {
           and implementing cutting-edge web solutions.
         </p>
         
-        <a href="#contact" className="cyber-button" aria-label="Contact Matias">
-          Contact Me
-        </a>
+        <div className="hero-actions">
+          <a href="#contact" className="cyber-button" aria-label="Contact Matias">
+            Contact Me
+          </a>
+          <a 
+            href="/src/assets/Matias-Fandiño-CV.pdf" 
+            className="cyber-button-alt" 
+            download="Matias-Fandiño-CV.pdf"
+            aria-label="Download Matias's CV"
+          >
+            Download CV
+          </a>
+        </div>
       </div>
     </section>
 

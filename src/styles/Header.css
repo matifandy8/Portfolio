@@ -57,6 +57,11 @@
   opacity: 0.8;
 }
 
+.nav-link.highlight {
+  color: var(--primary-red);
+  opacity: 1;
+}
+
 .nav-link::after {
   content: '';
   position: absolute;
