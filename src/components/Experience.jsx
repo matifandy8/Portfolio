@@ -1,3 +1,4 @@
+
 import '../styles/Experience.css'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
@@ -6,7 +7,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 function Experience() {
-
   const experiences = [
     {
       title: 'Frontend Developer',
@@ -33,72 +33,99 @@ function Experience() {
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    const mm = gsap.matchMedia();
+    const ctx = gsap.context(() => {
+      // Animate the roadmap line drawing
+      gsap.to(".roadmap-line-progress", {
+        scrollTrigger: {
+          trigger: ".roadmap-timeline",
+          start: "top center",
+          end: "bottom center",
+          scrub: true,
+        },
+        scaleY: 1,
+        ease: "none"
+      });
 
-    mm.add("(prefers-reduced-motion: no-preference)", () => {
-      const ctx = gsap.context(() => {
-        gsap.from(".section-title", {
+      // Animate roadmap points and content
+      const items = gsap.utils.toArray(".roadmap-item");
+      items.forEach((item) => {
+        const point = item.querySelector(".roadmap-point");
+        const content = item.querySelector(".roadmap-content");
+
+        gsap.from(point, {
           scrollTrigger: {
-            trigger: ".experience",
-            start: "top 90%",
-            once: true,
+            trigger: item,
+            start: "top center",
+            toggleActions: "play none none reverse",
           },
-          y: 30,
+          scale: 0,
           opacity: 0,
-          duration: 1,
-          ease: "power3.out"
-        })
+          duration: 0.5
+        });
 
-        gsap.from(".timeline-item", {
+        gsap.from(content, {
           scrollTrigger: {
-            trigger: ".timeline",
-            start: "top 90%",
-            once: true,
+            trigger: item,
+            start: "top center+=50",
+            toggleActions: "play none none reverse",
           },
-          y: 40,
+          x: 50,
           opacity: 0,
           duration: 0.8,
-          stagger: 0.15,
           ease: "power3.out"
-        })
-      }, sectionRef)
-      return () => ctx.revert()
-    });
+        });
+      });
+    }, sectionRef);
 
-    return () => mm.revert()
+    return () => ctx.revert();
   }, [])
-
-
-
 
   return (
     <section className="experience" ref={sectionRef}>
-      <div className="container">
-        <h2 id="experience-title" className="section-title">Professional Experience</h2>
+      <div className="roadmap-container">
         
-        <div className="timeline">
+        {/* Left Side: Sticky Title */}
+        <div className="roadmap-sticky-side">
+          <div className="sticky-content">
+            <h2 id="experience-title" className="roadmap-main-title">
+              Professional <br /> 
+              <span className="highlight">Experience</span>
+            </h2>
+            <p className="roadmap-intro">
+               A journey through my career as a developer, highlighting key milestones and technical growth.
+            </p>
+          </div>
+        </div>
+
+        {/* Right Side: Scrollable Timeline */}
+        <div className="roadmap-timeline">
+          <div className="roadmap-line-bg"></div>
+          <div className="roadmap-line-progress"></div>
+
           {experiences.map((exp, index) => (
-            <article className="timeline-item" key={index}>
-              <div className="timeline-content">
-                <header className="timeline-header">
-                  <h3 className="timeline-title">{exp.title}</h3>
-                  <time className="timeline-period">{exp.period}</time>
+            <div className="roadmap-item" key={index}>
+              <div className="roadmap-point"></div>
+              <div className="roadmap-content">
+                <header className="roadmap-header">
+                  <span className="roadmap-date">{exp.period}</span>
+                  <h3 className="roadmap-title">{exp.title}</h3>
                 </header>
                 
-                <h4 className="timeline-company">{exp.company}</h4>
-                <p className="timeline-description">{exp.description}</p>
+                <h4 className="roadmap-company">{exp.company}</h4>
+                <p className="roadmap-desc">{exp.description}</p>
                 
                 {exp.achievements.length > 0 && (
-                  <ul className="timeline-achievements">
+                  <ul className="roadmap-list">
                     {exp.achievements.map((achievement, achIndex) => (
                       <li key={achIndex}>{achievement}</li>
                     ))}
                   </ul>
                 )}
               </div>
-            </article>
+            </div>
           ))}
         </div>
+
       </div>
     </section>
   )
