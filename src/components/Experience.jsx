@@ -33,7 +33,20 @@ function Experience() {
   const sectionRef = useRef(null)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      // Desktop
+      isDesktop: "(min-width: 769px)",
+      // Mobile
+      isMobile: "(max-width: 768px)",
+      // Reduced motion
+      reduceMotion: "(prefers-reduced-motion: reduce)"
+    }, (context) => {
+      const { isMobile, reduceMotion } = context.conditions;
+
+      if (reduceMotion) return;
+
       // Animate the roadmap line drawing
       gsap.to(".roadmap-line-progress", {
         scrollTrigger: {
@@ -66,10 +79,10 @@ function Experience() {
         gsap.from(content, {
           scrollTrigger: {
             trigger: item,
-            start: "top center+=50",
+            start: isMobile ? "top 85%" : "top center+=50",
             toggleActions: "play none none reverse",
           },
-          x: 50,
+          x: isMobile ? 20 : 50,
           opacity: 0,
           duration: 0.8,
           ease: "power3.out"
@@ -77,7 +90,7 @@ function Experience() {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => mm.revert();
   }, [])
 
   return (

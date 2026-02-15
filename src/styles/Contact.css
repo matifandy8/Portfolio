@@ -140,7 +140,8 @@
 
 @media (max-width: 768px) {
   .contact {
-    padding: 6rem 1.5rem 4rem;
+    padding: 6rem 1.5rem 6rem;
+    min-height: auto;
   }
   
   .contact-info-centered {
@@ -150,13 +151,46 @@
 
   .contact-info h3 {
     font-size: 1.8rem;
+    letter-spacing: 1px;
+  }
+
+  .contact-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .contact-details {
+    gap: 1.5rem;
   }
 
   .contact-link {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
   }
 
   .social-links-centered {
     gap: 1rem;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact {
+    padding: 4rem 1rem 4rem;
+  }
+
+  .contact-info-centered {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .contact-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .contact-link {
+    font-size: 1.1rem;
+  }
+
+  .contact-label {
+    font-size: 0.7rem;
   }
 }

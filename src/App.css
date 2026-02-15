@@ -30,6 +30,13 @@
   font-size: 16px;
   line-height: 1.6;
   position: relative;
+  width: 100%;
+}
+
+@media (max-width: 480px) {
+  .app {
+    font-size: 14px;
+  }
 }
 
 /* Cyberpunk Utility Classes */
@@ -91,6 +98,14 @@
   transform: translateX(-101%);
   transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   z-index: -1;
+}
+
+@media (max-width: 768px) {
+  .cyber-button {
+    padding: 0.8rem 2rem;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+  }
 }
 
 .cyber-button:hover {
@@ -156,6 +171,13 @@
   transform: translateX(0);
 }
 
+@media (max-width: 768px) {
+  .cyber-button-alt {
+    padding: 0.6rem 1.5rem;
+    font-size: 0.85rem;
+  }
+}
+
 
 .global-background {
   position: fixed;
@@ -165,7 +187,8 @@
   bottom: 0;
   z-index: 0;
   background-image: url('./assets/images/hero-bg-circle-2.jpg');
-  background-size: 100% auto;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
   opacity: 0.3;
   pointer-events: none;

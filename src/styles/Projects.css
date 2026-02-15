@@ -169,25 +169,56 @@
 
 @media (max-width: 768px) {
   .projects {
-    padding: 4rem 2rem 2rem;
+    padding: 6rem 1.5rem 4rem;
   }
   
   .section-title {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    margin-bottom: 3rem;
   }
   
   .projects-grid {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
   }
   
   .project-image {
-    height: 150px;
+    height: 180px;
   }
   
   .project-content {
     padding: 1.5rem;
+  }
+
+  .project-title {
+    font-size: 1.4rem;
+  }
+
+  .project-description {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projects {
+    padding: 4rem 1rem;
+  }
+
+  .project-image {
+    height: 160px;
+  }
+
+  .project-content {
+    padding: 1.25rem;
+  }
+
+  .project-tech {
+    gap: 0.4rem;
+  }
+
+  .tech-tag {
+    padding: 0.3rem 0.7rem;
+    font-size: 0.6rem;
   }
 }
 

@@ -3,7 +3,6 @@
   position: relative;
   min-height: 100vh;
   padding: 10rem 4rem;
-  background-color: var(--bg-dark);
 }
 
 .roadmap-container {
@@ -14,7 +13,6 @@
   gap: 4rem;
 }
 
-/* Left Sticky Side */
 .roadmap-sticky-side {
   position: relative;
 }
@@ -44,7 +42,6 @@
   max-width: 400px;
 }
 
-/* Right Roadmap Timeline */
 .roadmap-timeline {
   position: relative;
   padding: 2rem 0;
@@ -83,7 +80,7 @@
 
 .roadmap-point {
   position: absolute;
-  left: -9px; /* Centered on the 2px line */
+  left: -9px;
   top: 0;
   width: 20px;
   height: 20px;
@@ -172,9 +169,13 @@
 }
 
 @media (max-width: 968px) {
+  .experience {
+    padding: 6rem 2rem;
+  }
+
   .roadmap-container {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
   }
 
   .roadmap-sticky-side {
@@ -183,26 +184,69 @@
 
   .sticky-content {
     position: static;
+    margin-bottom: 2rem;
   }
 
   .roadmap-main-title {
     text-align: center;
+    font-size: clamp(2rem, 8vw, 3rem);
   }
 
   .roadmap-intro {
     text-align: center;
     margin: 0 auto;
+    font-size: 1rem;
   }
   
   .roadmap-timeline {
-    padding-left: 20px;
+    padding-left: 1.5rem;
   }
 
   .roadmap-line-bg, .roadmap-line-progress {
-    left: 20px;
+    left: 0;
   }
   
   .roadmap-point {
-    left: 11px;
+    left: -9px;
+  }
+
+  .roadmap-item {
+    padding-left: 2.5rem;
+    margin-bottom: 4rem;
+  }
+
+  .roadmap-content {
+    padding: 1.5rem;
+    clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+  }
+
+  .roadmap-title {
+    font-size: 1.4rem;
+  }
+
+  .roadmap-company {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience {
+    padding: 4rem 1rem;
+  }
+
+  .roadmap-timeline {
+    padding-left: 1.2rem;
+  }
+
+  .roadmap-item {
+    padding-left: 1.8rem;
+  }
+
+  .roadmap-content {
+    padding: 1.25rem;
+  }
+
+  .roadmap-title {
+    font-size: 1.25rem;
   }
 }
