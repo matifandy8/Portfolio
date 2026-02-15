@@ -17,6 +17,7 @@ function App() {
   const [reducedMotion, setReducedMotion] = useState(() => 
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
   )
+  const [showHeader, setShowHeader] = useState(false)
   
   useEffect(() => {
     const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -33,19 +34,28 @@ function App() {
     const timer = setTimeout(() => {
       ScrollTrigger.refresh()
     }, 100)
+
+    ScrollTrigger.create({
+      trigger: "#experience",
+      start: "top 15%",
+      onEnter: () => setShowHeader(true),
+      onLeaveBack: () => setShowHeader(false)
+    })
+
+
   
     return () => {
       gsap.ticker.remove(update)
       mediaQuery.removeEventListener('change', handleChange)
       clearTimeout(timer)
     }
-  }, [])
+  }, [reducedMotion])
 
   return (
     <div className="app" >
       <div className="global-background" aria-hidden="true"></div>
       <ReactLenis root options={{ autoRaf: false }} ref={lenisRef}>
-        <Header />
+        <Header visible={showHeader} />
         
         <main id="main-content">
           <section id="home" aria-labelledby="hero-title">

@@ -1,8 +1,8 @@
 import '../styles/Header.css'
 
-function Header() {
+function Header({ visible }) {
   return (
-    <header className="header">
+    <header className={`header ${visible ? 'visible' : ''}`}>
       <div className="logo">
         <span className="logo-text">MATIAS DEV</span>
       </div>

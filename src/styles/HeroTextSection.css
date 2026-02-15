@@ -1,7 +1,8 @@
 .hero-text-section {
     position: fixed;
     top: 28%;
-    left: 15%;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .hero-text-image {
