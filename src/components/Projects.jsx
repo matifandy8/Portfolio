@@ -2,6 +2,9 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import '../styles/Projects.css'
+import zonapartidoImg from '../assets/images/zonapartido-project.png'
+import neobrutalismImg from '../assets/images/neobrutalismcss-project.png'
+import destinouruguayImg from '../assets/images/destinouruguay-project.webp'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -70,7 +73,7 @@ function Projects({ animationsEnabled = true }) {
       description: 'A modern web platform for organizing and managing sports matches, connecting individual players and teams looking to complete their lineups.',
       tech: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Clerk auth', 'Supabase'],
       link: 'https://zona-partido.vercel.app/',
-      image: '../src/assets/images/zonapartido-project.png'
+      image: zonapartidoImg
     },
     {
       title: 'NeoBrutalismCSS',
@@ -78,7 +81,7 @@ function Projects({ animationsEnabled = true }) {
       tech: ['HTML', 'CSS', 'Sass'],
       github: 'https://github.com/matifandy8/NeoBrutalismCSS',
       link: 'https://matifandy8.github.io/NeoBrutalismCSS/',
-      image: '../src/assets/images/neobrutalismcss-project.png'
+      image: neobrutalismImg
     },
     {
       title: 'Destino Uruguay',
@@ -86,7 +89,7 @@ function Projects({ animationsEnabled = true }) {
       tech: ['Next.js', 'TypeScript', 'Cheerio', 'Nodemailer'],
       github: 'https://github.com/matifandy8/destinouruguay',
       link: 'https://destinouruguay.vercel.app/',
-      image: '../src/assets/images/destinouruguay-project.webp'
+      image: destinouruguayImg
     },
   ]
 

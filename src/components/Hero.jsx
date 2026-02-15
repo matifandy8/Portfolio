@@ -78,7 +78,7 @@ function Hero() {
             Contact Me
           </a>
           <a 
-            href="/src/assets/Matias-Fandiño-CV.pdf" 
+            href="/Matias-Fandiño-CV.pdf" 
             className="cyber-button-alt" 
             download="Matias-Fandiño-CV.pdf"
             aria-label="Download Matias's CV"
