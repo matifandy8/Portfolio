@@ -3,6 +3,8 @@
     top: 28%;
     left: 50%;
     transform: translateX(-50%);
+    opacity: 0;
+    pointer-events: none;
 }
 
 .hero-text-image {

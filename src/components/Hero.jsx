@@ -3,9 +3,7 @@ import '../styles/Hero.css'
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import HeroTextSection from './HeroTextSection'
 
-// Register ScrollTrigger plugin
 gsap.registerPlugin(ScrollTrigger)
 
 function Hero() {
@@ -15,51 +13,38 @@ function Hero() {
     const mm = gsap.matchMedia();
 
     mm.add("(prefers-reduced-motion: no-preference)", () => {
-      // Sticky scroll animation with pin effect
-      gsap.to(".hero-content", {
-        opacity: 0,
-        scale: 0.8,
-        ease: "none",
+      const mainTl = gsap.timeline({
         scrollTrigger: {
           trigger: ".hero",
           start: "top top",
-          end: "bottom top",
+          end: "+=200%",
           scrub: 1,
           pin: true,
           pinSpacing: true,
           markers: false
         }
-      })
+      });
 
-      gsap.fromTo(".hero-text-section", {
-        opacity: 0.2,
-      }, {
-        opacity: 1,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "10% top",
-          end: "50% top",
-          pin: true,
-          markers: false,
-          pinSpacing: true,
-          scrub: 1.5
-        }
-      })
-
-      gsap.to(".hero-text-section", {
+      mainTl.to(".hero-content", {
         opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".hero",
-          start: "50% top",
-          end: "150% top",
-          pin: true,
-          markers: false,
-          pinSpacing: true,
-          scrub: 2
-        }
-      })
+        scale: 0.8,
+        y: -50,
+        duration: 1,
+        ease: "power1.inOut"
+      });
+
+      mainTl.fromTo(".hero-text-section",
+        { opacity: 0.1, scale: 0.8 },
+        { opacity: 1, scale: 1, duration: 1.5, ease: "power2.out" },
+        "-=0.5"
+      );
+
+      mainTl.to(".hero-text-section", {
+        opacity: 0,
+        scale: 1.4,
+        duration: 1.5,
+        ease: "power2.in"
+      });
 
     });
 
